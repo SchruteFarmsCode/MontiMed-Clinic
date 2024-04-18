@@ -20,6 +20,7 @@ public class Patient {
     private int age;
     private String email;
     private Date dateOfBirth;
+    private String gender;
 
 
 }
