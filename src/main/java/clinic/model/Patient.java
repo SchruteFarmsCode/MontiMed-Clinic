@@ -1,16 +1,16 @@
 package clinic.model;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 import lombok.Data;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.util.Date;
 
 @Entity
 @Data
 public class Patient {
+    public static final Logger logger = LoggerFactory.getLogger(Patient.class);
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -21,6 +21,21 @@ public class Patient {
     private String email;
     private Date dateOfBirth;
     private String gender;
+    @PrePersist
+    public void beforeSave() {
+        logger.info("Saving patient: {}", this);
+
+    }
+    @PreRemove
+    public void beforeDelete() {
+        logger.info("Deleting patient with id: {}", this.id);
+
+    }
+    @PreUpdate
+    public void beforeUpdate() {
+        logger.info("Updating patient: {}", this);
+
+    }
 
 
 }

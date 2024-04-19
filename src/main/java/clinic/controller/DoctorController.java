@@ -13,8 +13,8 @@ import java.util.List;
 public class DoctorController {
     private final PatientService patientService;
 
-//    @GetMapping("/doctor")
-//    public List<Patient> getAllPatients() {
-//        return patientService.getAllPatients();
-//    }
+    @GetMapping("/doctor")
+    public List<Patient> getAllPatients() {
+        return patientService.getAllPatients();
+    }
 }

@@ -1,4 +1,5 @@
 <configuration>
+
     <property name="LOG_FILE" value="${user.dir}/logs/application.log"/>
 
     <appender name="CONSOLE" class="ch.qos.logback.core.ConsoleAppender">
@@ -15,16 +16,19 @@
         </encoder>
     </appender>
 
-    <logger name="clinic" level="debug" additivity="false">
-        <appender-ref ref="FILE"/>
-    </logger>
+    <appender name="FILE_DEBUG" class="ch.qos.logback.core.ConsoleAppender">
+        <encoder>
+            <pattern>Appender FILE is being used to log messages</pattern>
+        </encoder>
+    </appender>
 
     <logger name="clinic" level="debug" additivity="false">
         <appender-ref ref="FILE"/>
-        <appender-ref ref="CONSOLE"/>
+        <appender-ref ref="FILE_DEBUG"/>
     </logger>
 
     <root level="warn">
         <appender-ref ref="CONSOLE"/>
     </root>
+
 </configuration>
