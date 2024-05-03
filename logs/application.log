@@ -90,3 +90,7 @@
 2024-04-20 01:34:21.186 [restartedMain] DEBUG clinic.MontiMedClinicApplication - Running with Spring Boot v3.2.4, Spring v6.1.5
 2024-04-20 01:34:21.186 [restartedMain] INFO  clinic.MontiMedClinicApplication - No active profile set, falling back to 1 default profile: "default"
 2024-04-20 01:34:24.199 [restartedMain] INFO  clinic.MontiMedClinicApplication - Started MontiMedClinicApplication in 3.277 seconds (process running for 3.924)
+2024-05-03 20:10:57.477 [restartedMain] INFO  clinic.MontiMedClinicApplication - Starting MontiMedClinicApplication using Java 17 with PID 8960 (E:\Repo\MontiMed-Clinic\build\classes\java\main started by szyme in E:\Repo\MontiMed-Clinic)
+2024-05-03 20:10:57.479 [restartedMain] DEBUG clinic.MontiMedClinicApplication - Running with Spring Boot v3.2.4, Spring v6.1.5
+2024-05-03 20:10:57.479 [restartedMain] INFO  clinic.MontiMedClinicApplication - No active profile set, falling back to 1 default profile: "default"
+2024-05-03 20:11:01.794 [restartedMain] INFO  clinic.MontiMedClinicApplication - Started MontiMedClinicApplication in 4.626 seconds (process running for 5.713)
