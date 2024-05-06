@@ -16,10 +16,10 @@ MontiMed Clinic is a web application project designed for managing a medical cli
    cd MontiMed-Clinic
    ```
 
-3. Run the application using Maven:
+3. Run the application using Gradle:
 
    ```bash
-   mvn spring-boot:run
+   ./gradlew bootRun
    ```
 
 ## Usage
@@ -43,6 +43,10 @@ spring.datasource.url=jdbc:postgresql://localhost:5432/MontiDB
 spring.datasource.username=postgres
 spring.datasource.password=postgres
 spring.datasource.driver-class-name=org.postgresql.Driver
+spring.jpa.hibernate.ddl-auto=update
+spring.thymeleaf.prefix=classpath:/templates/
+spring.thymeleaf.suffix=.html
+logging.config=classpath:logback.xml
 ```
 
 ## Contributing

@@ -2,15 +2,18 @@ package clinic.model;
 
 import jakarta.persistence.*;
 import lombok.Data;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import lombok.NoArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 @Data
 @Entity
+@Slf4j
+@NoArgsConstructor
 public class Visit {
-    public static final Logger logger = LoggerFactory.getLogger(Visit.class);
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -22,17 +25,23 @@ public class Visit {
 
     @ManyToOne
     private Doctor doctor;
+
+    @OneToMany(mappedBy = "visit", cascade = CascadeType.ALL)
+    private List<Prescription> prescriptions = new ArrayList<>();
+
     @PrePersist
     public void beforeSave() {
-        logger.info("Saving visit: {}", this);
+        log.info("Saving visit: {}", this);
     }
+
     @PreRemove
     public void beforeDelete() {
-        logger.info("Deleting visit with id: {}", this.id);
+        log.info("Deleting visit with id: {}", this.id);
     }
+
     @PreUpdate
     public void beforeUpdate() {
-        logger.info("Updating visit: {}", this);
+        log.info("Updating visit: {}", this);
 
     }
 }

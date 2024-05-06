@@ -4,40 +4,39 @@ import clinic.model.Visit;
 import clinic.repository.VisitRepository;
 import jakarta.persistence.EntityNotFoundException;
 import lombok.AllArgsConstructor;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 
 @AllArgsConstructor
 @Service
+@Slf4j
 public class VisitService {
     private final VisitRepository visitRepository;
-    private static final Logger logger = LoggerFactory.getLogger(VisitService.class);
 
     public List<Visit> getAllVisits() {
-        logger.info("All Visits");
+        log.info("All Visits");
         return visitRepository.findAll();
     }
 
     public Visit saveVisit(Visit visit) {
-        logger.info("Saving Visit: {}", visit);
+        log.info("Saving Visit: {}", visit);
         return visitRepository.save(visit);
     }
 
     public Visit getVisitById(Long id) {
-        logger.info("Visit with ID: {}", id);
+        log.info("Visit with ID: {}", id);
         return visitRepository.findById(id).orElseThrow(() -> new EntityNotFoundException("Visit with ID " + id + " not found"));
     }
 
     public void deleteVisit(Long id) {
-        logger.info("Deleting visit with ID: {}",id);
+        log.info("Deleting visit with ID: {}",id);
         visitRepository.deleteById(id);
     }
 
     public Visit updateVisit(Long id, Visit visit) {
-        logger.info("Updating visit with ID: {}", id);
+        log.info("Updating visit with ID: {}", id);
         Visit existingVisit = visitRepository.findById(id)
                 .orElseThrow(() -> new EntityNotFoundException("Visit with ID " + id + " not found"));
 
@@ -49,12 +48,12 @@ public class VisitService {
     }
 
     public List<Visit> getVisitsByPatientId(Long patientId) {
-        logger.info("Getting visits for patient with ID: {}", patientId);
+        log.info("Getting visits for patient with ID: {}", patientId);
         return visitRepository.findByPatientId(patientId);
     }
 
     public List<Visit> getVisitByDoctorId(Long doctorId) {
-        logger.info("Getting visits for doctor with ID: {}", doctorId);
+        log.info("Getting visits for doctor with ID: {}", doctorId);
         return visitRepository.findByDoctorId(doctorId);
     }
 }
