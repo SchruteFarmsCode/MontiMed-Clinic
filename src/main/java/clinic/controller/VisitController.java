@@ -2,6 +2,7 @@ package clinic.controller;
 
 import clinic.model.Visit;
 import clinic.service.VisitService;
+import jakarta.persistence.EntityNotFoundException;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
@@ -19,15 +20,17 @@ public class VisitController {
     private final VisitService visitService;
 
     @GetMapping
-    public List<Visit> getAllVisits() {
+    public ResponseEntity<List<Visit>> getAllVisits() {
         log.info("Getting all visits");
-        return visitService.getAllVisits();
+        List<Visit> visits = visitService.getAllVisits();
+        return new ResponseEntity<>(visits, HttpStatus.OK);
     }
+
     @PostMapping
     public ResponseEntity<Visit> addVisit(@RequestBody Visit visit) {
         log.info("Adding a new visit: {}", visit);
         Visit savedVisit = visitService.saveVisit(visit);
-        return  new ResponseEntity<>(savedVisit, HttpStatus.CREATED);
+        return new ResponseEntity<>(savedVisit, HttpStatus.CREATED);
     }
 
     @DeleteMapping("/{id}")
@@ -37,8 +40,8 @@ public class VisitController {
         return ResponseEntity.ok("Visit with id " + id + " has been deleted successfully");
     }
 
-    @PutMapping("visits/{id}")
-    public ResponseEntity<Visit>  updateVisit(@PathVariable Long id, @RequestBody Visit visit) {
+    @PutMapping("/{id}")
+    public ResponseEntity<Visit> updateVisit(@PathVariable Long id, @RequestBody Visit visit) {
         log.info("Updating visit with id: {}", id);
         Visit updatedVisit = visitService.updateVisit(id, visit);
         return ResponseEntity.ok(updatedVisit);
@@ -54,5 +57,11 @@ public class VisitController {
     public List<Visit> getVisitByDoctorId(@PathVariable Long doctorId) {
         log.info("Getting all visits for doctor with id: {}", doctorId);
         return visitService.getVisitByDoctorId(doctorId);
+    }
+
+    @ExceptionHandler(EntityNotFoundException.class)
+    public ResponseEntity<String> handleEntityNotFoundException(EntityNotFoundException e) {
+        log.error("Entity not found exception: {}", e.getMessage());
+        return ResponseEntity.status(HttpStatus.NOT_FOUND).body(e.getMessage());
     }
 }

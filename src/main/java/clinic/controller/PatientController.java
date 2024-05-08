@@ -2,6 +2,7 @@ package clinic.controller;
 
 import clinic.model.Patient;
 import clinic.service.PatientService;
+import jakarta.persistence.EntityNotFoundException;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
@@ -71,6 +72,11 @@ public class PatientController {
         log.info("Getting all patients sorted by: {}", sortBy);
         List<Patient> patients = patientService.getAllPatientsSortedBy(sortBy);
         return new ResponseEntity<>(patients, HttpStatus.OK);
+    }
+    @ExceptionHandler(EntityNotFoundException.class)
+    public ResponseEntity<String> handleEntityNotFoundException(EntityNotFoundException e) {
+        log.error("Entity not found exception: {}", e.getMessage());
+        return ResponseEntity.status(HttpStatus.NOT_FOUND).body(e.getMessage());
     }
 
 }

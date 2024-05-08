@@ -47,5 +47,10 @@ public class DoctorService {
 
         return doctorRepository.save(existingDoctor);
     }
+
+    public List<Doctor> getDoctorsBySpecialization(String specialization) {
+        log.info("Getting doctors by specialization: {}", specialization);
+        return doctorRepository.findBySpecialization(specialization);
+    }
 }
 
